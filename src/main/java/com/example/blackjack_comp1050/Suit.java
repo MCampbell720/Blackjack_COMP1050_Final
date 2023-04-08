@@ -7,9 +7,9 @@ public final class Suit {
     private String symbol;
 
     //Constructors
-    private Suit( String nameValue, String symbolValue ) {
-        name = nameValue;
-        symbol = symbolValue;
+    private Suit( String name, String symbol ) {
+        this.name = name;
+        this.symbol = symbol;
     }
     //Initialize the four suits
     public final static Suit CLUB = new Suit("Clubs", "c");
