@@ -1,5 +1,8 @@
 package com.example.blackjack_comp1050;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 public class Rank {
 
     //Variables
@@ -33,4 +36,8 @@ public class Rank {
     public String getSymbol() {
         return symbol;
     }
+    //Needed for deck iterator
+    public final static java.util.List VALUES =
+            Collections.unmodifiableList( Arrays.asList( new Rank[] { ACE, TWO, THREE, FOUR, FIVE, SIX, SEVEN,
+                    EIGHT, NINE, TEN, JACK, QUEEN, KING } ) );
 }
