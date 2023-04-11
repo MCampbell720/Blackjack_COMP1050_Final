@@ -21,9 +21,6 @@ public final class Suit {
     public final static Suit DIAMONDS = new Suit("Diamonds", "d");
 
     //Methods
-    public String getName() {
-        return name;
-    }
     public String getSymbol() {
         return symbol;
     }

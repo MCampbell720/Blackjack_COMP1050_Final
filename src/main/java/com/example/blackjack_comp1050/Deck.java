@@ -50,12 +50,6 @@ public class Deck {
         else
             return (Card) deck.get( var++ );
     }
-    public boolean isEmpty() {
-        if ( var >= deck.size() )
-            return true;
-        else
-            return false;
-    }
     public void shuffle() {
         Collections.shuffle( deck );
     }

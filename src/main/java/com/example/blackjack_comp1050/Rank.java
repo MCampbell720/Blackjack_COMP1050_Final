@@ -30,9 +30,6 @@ public class Rank {
     public final static Rank KING = new Rank( "King", "k" );
 
     //Methods
-    public String getName() {
-        return name;
-    }
     public String getSymbol() {
         return symbol;
     }
