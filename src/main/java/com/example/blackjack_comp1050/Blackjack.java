@@ -37,18 +37,13 @@ public class Blackjack extends Application {
     Label status = new Label();
     Image imagebackground = new Image("C:/Users/campbellm7/OneDrive - Wentworth Institute of Technology/Computer Science II/Blackjack_COMP1050_Final/src/main/resources/com/example/blackjack_comp1050/table.png");
     //Extra methods
-    //Shuffle
-    public void newDeck() {
+    public void newDeck() {    //Shuffle
         deck.restoreDeck();
         deck.shuffle();
         System.out.println("The deck has been shuffled!");
-        status.setText("The deck has been shuffled!");
     }
-    //New game
-    public void newPlayer() {
-        if (deck.getRemaining() <= deck.getSize()*.2) {
-            newDeck();
-        }
+    public void newPlayer() {    //New game
+        if (deck.getRemaining() <= deck.getSize()*.2) { newDeck(); }
         player.discardHand();
         dealer.discardHand();
         cards.getChildren().removeAll(cards.getChildren());
@@ -60,8 +55,7 @@ public class Blackjack extends Application {
         draw(player, cards, totalLabel);
         draw(dealer, dealerCards, totalDealerLabel);
         draw(player, cards, totalLabel);
-        status.setText("Your turn!");
-    }
+        status.setText("Your turn!"); }
     public void draw(Player player, FlowPane pane, Label l){
         try{
             Card card = deck.deal();
@@ -70,19 +64,12 @@ public class Blackjack extends Application {
             player.addCard(card);
             int playerTotal = player.getTotal();
             StringBuilder total = new StringBuilder();
-            if (player.getVal() > 0) {
-                total.append(playerTotal-10).append("/");
-            }
+            if (player.getVal() > 0) { total.append(playerTotal-10).append("/"); }
             total.append(playerTotal);
             l.setText(total.toString());
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
-    }
-    //Game
+        } catch (Exception ex) { System.out.println(ex.getMessage()); } }
     @Override
-    public void start(Stage primaryStage) {
-        //Text colors and fonts
+    public void start(Stage primaryStage) { //Text colors and fonts
         totalLabel.setFont(new Font("Papyrus", 24));
         totalLabel.setTextFill(Color.web("#FFF"));
         totalDealerLabel.setFont(new Font("Papyrus", 24));
@@ -100,61 +87,44 @@ public class Blackjack extends Application {
         //Hit Button
         Button drawbtn = new Button();
         drawbtn.setText("Hit");
-        //If player turn and not busted...
-        drawbtn.setOnAction((e) -> {
+        drawbtn.setOnAction((e) -> { //If player turn and not busted...
             if(isTurn == true && isBust != true){
                 draw(player, cards, totalLabel);
-
                 if(player.getTotal() > 21){
                     //Big Bust
                     System.out.println("Bust");
                     isBust = true;
                     isTurn = false;
-                    status.setText("Bust");
-                }
-            }
-        });
+                    status.setText("Bust"); } } });
         //Stand Button
         Button standbtn = new Button();
         standbtn.setText("Stand");
-        //Blackjack logic
-        standbtn.setOnAction((e) -> {
+        standbtn.setOnAction((e) -> { //Blackjack logic
             if(isTurn == true && isBust != true){
                 isTurn = false;
                 while(dealer.getTotal() < 17){
                     draw(dealer, dealerCards, totalDealerLabel);
                 }
-
                 int playerTotal = player.getTotal();
                 int dealerTotal = dealer.getTotal();
-
                 System.out.println("Player: "+player);
                 System.out.println("Dealer: "+dealer);
-
-                if(dealerTotal <= 21 && playerTotal == dealerTotal){
-                    // tie, push
+                if(dealerTotal <= 21 && playerTotal == dealerTotal){ //Draw/Push
                     System.out.println("Push");
                     status.setText("Push");
-                } else if(dealerTotal <= 21 && playerTotal <= dealerTotal){
-                    // you lost
+                } else if(dealerTotal <= 21 && playerTotal <= dealerTotal){ // you lost
                     System.out.println("You lose!");
                     status.setText("You lose!");
                 } else if(deck.getRemaining() < 5) {
                     System.out.println("The deck has been shuffled!");
                     status.setText("The deck has been shuffled!");
-                } else {
-                    // you won
+                } else { // you won
                     System.out.println("You win!");
-                    status.setText("You win!");
-                }
-            }
-        });
+                    status.setText("You win!"); } } });
         //Deal button
         Button newbtn = new Button();
         newbtn.setText("New Hand");
-        newbtn.setOnAction((e) -> {
-            newPlayer();
-        });
+        newbtn.setOnAction((e) -> { newPlayer(); });
         //Grid
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
@@ -177,15 +147,12 @@ public class Blackjack extends Application {
         grid.add(status, 0, 6, 3, 1);
         grid.setBackground(background);
         //Resolution
-        Scene scene = new Scene(grid, 1200, 675);
+        Scene scene = new Scene(grid, 1440, 810);
         //Window
-        primaryStage.setTitle("COMP1050 - Blackjack");
+        primaryStage.setTitle("COMP1050 Final Project - Blackjack");
         primaryStage.setScene(scene);
         primaryStage.show();
         newDeck();
-        newPlayer();
-    }
+        newPlayer(); }
     public static void main(String[] args) {
-        launch(args);
-    }
-}
+        launch(args); }}
